@@ -22,5 +22,13 @@ var FbApi = ((oldCrap) => {
 		});
 	};
 
+	oldCrap.addTodo = (newTodo) => {
+		return new Promise ((resolve, reject) => {
+			newTodo.id = `item${FbApi.todoGetter().length}`;
+			FbApi.setSingleTodo(newTodo);
+			resolve();
+		})
+	}
+
 	return oldCrap;
 })(FbApi || {});
