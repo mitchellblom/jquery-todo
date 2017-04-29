@@ -41,6 +41,15 @@ $(document).ready(function(){
 	// delete todo
 	// edit todo
 	// complete todos
+	$('.main-container').on('click', 'input[type="checkbox"]', (event) => {
+		console.log("id", event.target.id);
+		FbApi.checker(event.target.id).then(() => {
+			FbApi.writeDom();
+			countTask();
+		}). catch((error) => {
+			console.log("checker error", error);
+		})
+	})
 
 
 	let countTask = () => {

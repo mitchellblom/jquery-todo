@@ -28,7 +28,14 @@ var FbApi = ((oldCrap) => {
 			FbApi.setSingleTodo(newTodo);
 			resolve();
 		})
-	}
+	};
+
+	oldCrap.checker = (id) => {
+		return new Promise((resolve, reject) => {
+			FbApi.setChecked(id);
+			resolve();
+		});
+	};
 
 	return oldCrap;
 })(FbApi || {});
