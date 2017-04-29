@@ -11,7 +11,12 @@ $(document).ready(function(){
 	});
 
 
-
+	FbApi.getTodos().then((results) => {
+		FbApi.writeDom();
+	})
+		.catch((error) => {
+			console.log("getTodos Error", error);
+		});
 
 
 
