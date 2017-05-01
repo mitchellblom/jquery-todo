@@ -14,6 +14,10 @@ var FbApi = (() => {
 		setChecked: (itemId) => {
 			const position = itemId.split("item")[1]; // item0 = ["", 0]
 			todos[position].isCompleted = !todos[position].isCompleted;
+		},
+		duhlete : (id) => {
+			const position = id.split("item")[1];
+			todos.splice(position, 1);
 		}
 	};
 })();

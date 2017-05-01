@@ -12,7 +12,7 @@ var FbApi = ((oldCrap) => {
 					console.log("key", key);
 					response[key].id = key;
 					items.push(response[key]);
-				})
+				});
 				FbApi.setTodos(items);
 				resolve();
 			})
@@ -27,7 +27,7 @@ var FbApi = ((oldCrap) => {
 			newTodo.id = `item${FbApi.todoGetter().length}`;
 			FbApi.setSingleTodo(newTodo);
 			resolve();
-		})
+		});
 	};
 
 	oldCrap.checker = (id) => {
@@ -36,6 +36,15 @@ var FbApi = ((oldCrap) => {
 			resolve();
 		});
 	};
+
+	oldCrap.deleteTodo = (id) => {
+		return new Promise ((resolve, reject) => {
+			FbApi.duhlete(id);
+			resolve();
+		});
+	};
+
+
 
 	return oldCrap;
 })(FbApi || {});

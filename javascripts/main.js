@@ -33,12 +33,22 @@ $(document).ready(function(){
 			countTask();
 		}).catch((error) => {
 			console.log("addTodoError", error);
-		})
+		});
 	});
 
 
 
 	// delete todo
+
+	$('.main-container').on('click', '.delete', (event) => {
+		FbApi.deleteTodo(event.target.id).then(() => {
+			FbApi.writeDom();
+			countTask();
+		}).catch((error) =>
+			console.log("error in deleteTodo", error) 
+		);											
+	});
+
 	// edit todo
 	// complete todos
 	$('.main-container').on('click', 'input[type="checkbox"]', (event) => {
@@ -46,10 +56,10 @@ $(document).ready(function(){
 		FbApi.checker(event.target.id).then(() => {
 			FbApi.writeDom();
 			countTask();
-		}). catch((error) => {
+		}).catch((error) => {
 			console.log("checker error", error);
-		})
-	})
+		});
+	});
 
 
 	let countTask = () => {
