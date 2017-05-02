@@ -22,9 +22,15 @@ var FbApi = ((oldCrap) => {
 
 	oldCrap.addTodo = (apiKeys, newTodo) => {
 		return new Promise ((resolve, reject) => {
-			newTodo.id = `item${FbApi.todoGetter().length}`;
-			FbApi.setSingleTodo(newTodo);
-			resolve();
+			$.ajax({
+				method: 'POST',
+				url: `${apiKeys.databaseURL}/items.json`,
+				data: JSON.stringify(newTodo)						// always stringify post data
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
 		});
 	};
 
