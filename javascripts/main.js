@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	let apiKeys;
+	let editID = '';
 
 	$('#new-item').click(() => {
 		$('.list-container').addClass('hide');
@@ -25,14 +26,26 @@ $(document).ready(function(){
 			isCompleted: false,
 			task: $('#add-todo-text').val()
 		};
-		FbApi.addTodo(apiKeys, newTodo).then(() => {
-			$('#add-todo-text').val('');
-			$('.new-container').addClass('hide');
-			$('.list-container').removeClass('hide');
-			FbApi.writeDom(apiKeys);
-		}).catch((error) => {
-			console.log("addTodoError", error);
-		});
+		if (editId.length > 0) {
+			FbApi.editTodo(apiKeys, newTodo, editId).then(() => {
+				$('#add-todo-text').val('');
+				editId = '';
+				$('.new-container').addClass('hide');
+				$('.list-container').removeClass('hide');
+				FbApi.writeDom(apiKeys);
+			}).catch((error) => {
+				console.log("addTodoError", error);
+			});
+		} else {
+			FbApi.addTodo(apiKeys, newTodo).then(() => {
+				$('#add-todo-text').val('');
+				$('.new-container').addClass('hide');
+				$('.list-container').removeClass('hide');
+				FbApi.writeDom(apiKeys);
+			}).catch((error) => {
+				console.log("addTodoError", error);
+			});
+		}
 	});
 
 	// delete todo
@@ -47,17 +60,11 @@ $(document).ready(function(){
 	// edit todo
 	$('.main-container').on('click', '.edit', (event) => {
 		let editText = $(event.target).closest('.col-xs-4').siblings('.col-xs-8').find('.task').html();
-		FbApi.editTodo(event.target.id).then(() => {
+		editId = event.target.id;
 			$('.list-container').addClass('hide');
 			$('.new-container').removeClass('hide');
 			$('#add-todo-text').val(editText);
-		}).catch((error) => {
-			console.log('error from editTodo', error);
-		});
-		// pass the id into the promise
-		// grab the edit text
 	});
-
 
 
 	// complete todos
