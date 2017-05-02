@@ -44,7 +44,7 @@ var FbApi = ((oldCrap) => {
 				resolve();
 			}).fail((error) => {
 				reject(error);
-			})
+			});
 		});
 	};
 

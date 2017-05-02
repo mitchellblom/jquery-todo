@@ -15,20 +15,9 @@ $(document).ready(function(){
 		apiKeys = keys;
 		firebase.initializeApp(apiKeys);
 		FbApi.writeDom(apiKeys);
-		countTask();
 	}).catch((error) => {
 		console.log("key errors", error);
 	});
-
-
-	// get todo
-	// FbApi.getTodos().then((results) => {
-	// 	FbApi.writeDom(apiKeys);
-	// 	countTask();
-	// })
-	// 	.catch((error) => {
-	// 		console.log("getTodos Error", error);
-	// 	});
 
 	// add todo
 	$('#add-todo-button').click(() => {
@@ -41,19 +30,15 @@ $(document).ready(function(){
 			$('.new-container').addClass('hide');
 			$('.list-container').removeClass('hide');
 			FbApi.writeDom(apiKeys);
-			countTask();
 		}).catch((error) => {
 			console.log("addTodoError", error);
 		});
 	});
 
-
-
 	// delete todo
 	$('.main-container').on('click', '.delete', (event) => {
 		FbApi.deleteTodo(apiKeys, event.target.id).then(() => {
 			FbApi.writeDom(apiKeys);
-			countTask();
 		}).catch((error) =>
 			console.log("error in deleteTodo", error) 
 		);											
@@ -80,19 +65,10 @@ $(document).ready(function(){
 		console.log("id", event.target.id);
 		FbApi.checker(event.target.id).then(() => {
 			FbApi.writeDom(apiKeys);
-			countTask();
 		}).catch((error) => {
 			console.log("checker error", error);
 		});
 	});
-
-
-	let countTask = () => {
-		let remainingTasks = $('#incomplete-tasks li').length;
-		$('#counter').hide().fadeIn(1500).html(remainingTasks);
-	};
-
-
 
 
 
