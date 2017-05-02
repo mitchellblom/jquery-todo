@@ -39,7 +39,6 @@ $(document).ready(function(){
 
 
 	// delete todo
-
 	$('.main-container').on('click', '.delete', (event) => {
 		FbApi.deleteTodo(event.target.id).then(() => {
 			FbApi.writeDom();
@@ -50,6 +49,21 @@ $(document).ready(function(){
 	});
 
 	// edit todo
+	$('.main-container').on('click', '.edit', (event) => {
+		let editText = $(event.target).closest('.col-xs-4').siblings('.col-xs-8').find('.task').html();
+		FbApi.editTodo(event.target.id).then(() => {
+			$('.list-container').addClass('hide');
+			$('.new-container').removeClass('hide');
+			$('#add-todo-text').val(editText);
+		}).catch((error) => {
+			console.log('error from editTodo', error);
+		});
+		// pass the id into the promise
+		// grab the edit text
+	});
+
+
+
 	// complete todos
 	$('.main-container').on('click', 'input[type="checkbox"]', (event) => {
 		console.log("id", event.target.id);
