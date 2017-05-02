@@ -34,13 +34,6 @@ var FbApi = ((oldCrap) => {
 		});
 	};
 
-	oldCrap.checker = (apiKeys, id) => {
-		return new Promise((resolve, reject) => {
-			FbApi.setChecked(id);
-			resolve();
-		});
-	};
-
 	oldCrap.deleteTodo = (apiKeys, id) => {
 		return new Promise ((resolve, reject) => {
 			$.ajax({
