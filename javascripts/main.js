@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	let apiKeys;
 
 	$('#new-item').click(() => {
 		$('.list-container').addClass('hide');
@@ -10,14 +11,24 @@ $(document).ready(function(){
 		$('.list-container').removeClass('hide');
 	});
 
-	// get todo
-	FbApi.getTodos().then((results) => {
-		FbApi.writeDom();
+	FbApi.firebaseCredentials().then((keys) => {
+		apiKeys = keys;
+		firebase.initializeApp(apiKeys);
+		FbApi.writeDom(apiKeys);
 		countTask();
-	})
-		.catch((error) => {
-			console.log("getTodos Error", error);
-		});
+	}).catch((error) => {
+		console.log("key errors", error);
+	});
+
+
+	// get todo
+	// FbApi.getTodos().then((results) => {
+	// 	FbApi.writeDom();
+	// 	countTask();
+	// })
+	// 	.catch((error) => {
+	// 		console.log("getTodos Error", error);
+	// 	});
 
 	// add todo
 	$('#add-todo-button').click(() => {

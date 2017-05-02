@@ -1,20 +1,18 @@
 var FbApi = ((oldCrap) => {
 
-	oldCrap.getTodos = () => {
+	oldCrap.getTodos = (apiKeys) => {
 		let items = [];
 		return new Promise ((resolve, reject) => {
 
-			$.ajax('./database/seed.json')
+			$.ajax(`${apiKeys.databaseURL}/items.json`)
 			.done((data) => {								// want to grab the value and inject the id
-
-				let response = data.items;
+				let response = data;
 				Object.keys(response).forEach((key) => {		// this is the same action for every firebase call
 					console.log("key", key);
 					response[key].id = key;
 					items.push(response[key]);
 				});
-				FbApi.setTodos(items);
-				resolve();
+				resolve(items);
 			})
 			.fail((error) => {
 				reject(error);
