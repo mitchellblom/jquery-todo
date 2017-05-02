@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 	// get todo
 	// FbApi.getTodos().then((results) => {
-	// 	FbApi.writeDom();
+	// 	FbApi.writeDom(apiKeys);
 	// 	countTask();
 	// })
 	// 	.catch((error) => {
@@ -40,7 +40,7 @@ $(document).ready(function(){
 			$('#add-todo-text').val('');
 			$('.new-container').addClass('hide');
 			$('.list-container').removeClass('hide');
-			FbApi.writeDom();
+			FbApi.writeDom(apiKeys);
 			countTask();
 		}).catch((error) => {
 			console.log("addTodoError", error);
@@ -51,8 +51,8 @@ $(document).ready(function(){
 
 	// delete todo
 	$('.main-container').on('click', '.delete', (event) => {
-		FbApi.deleteTodo(event.target.id).then(() => {
-			FbApi.writeDom();
+		FbApi.deleteTodo(apiKeys, event.target.id).then(() => {
+			FbApi.writeDom(apiKeys);
 			countTask();
 		}).catch((error) =>
 			console.log("error in deleteTodo", error) 
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	$('.main-container').on('click', 'input[type="checkbox"]', (event) => {
 		console.log("id", event.target.id);
 		FbApi.checker(event.target.id).then(() => {
-			FbApi.writeDom();
+			FbApi.writeDom(apiKeys);
 			countTask();
 		}).catch((error) => {
 			console.log("checker error", error);
