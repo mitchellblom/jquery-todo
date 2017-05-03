@@ -10,8 +10,8 @@ var FbApi = ((fish) => {
 				resolve(response);
 			}).fail((error) => {
 				reject(error);
-			})
-		})
+			});
+		});
 	};
 
 	return fish;
