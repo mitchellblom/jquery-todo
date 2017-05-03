@@ -1,17 +1,15 @@
-var FbApi = ((cats) => {
+var FbApi = ((oldFbApi) => {
 
-	cats.registerUser = (credentials) => {
+	oldFbApi.registerUser = (credentials) => {
 		return new Promise ((resolve, reject) => {
-			firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
-			.then((authData) => {
-				resolve(authData);
-			}).catch((error) => {
-				reject(error);
-			});
+				firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+				.then((authData) => {
+					resolve(authData);
+				}).catch((error) => {
+					reject(error);
+				});
 		});
 	};
 
-
-
-	return cats;
+	return oldFbApi;
 })(FbApi || {});

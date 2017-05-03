@@ -3,7 +3,7 @@
   "description": "",
   "main": "",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/mitchellblom/jquery-todo",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,5 +14,8 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "bootstrap": "^3.3.7"
-  }
+  },
+  "authors": [
+    "Mitchell Blom <mitchellblom@gmail.com>"
+  ]
 }
