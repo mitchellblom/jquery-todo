@@ -1,8 +1,0 @@
-{
-   "apiKey": "AIzaSyDgi09xaP7XhRv-P_9ossK96YYO2hj0hEw",
-    "authDomain": "jquery-todo-2.firebaseapp.com",
-    "databaseURL": "https://jquery-todo-2.firebaseio.com",
-    "projectId": "jquery-todo-2",
-    "storageBucket": "jquery-todo-2.appspot.com",
-    "messagingSenderId": "432595010355"
- }
