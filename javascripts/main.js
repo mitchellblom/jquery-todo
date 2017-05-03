@@ -36,8 +36,6 @@ $(document).ready(function(){
 		});
 	});
 
-
-
 	// delete todo
 	$('.main-container').on('click', '.delete', (event) => {
 		FbApi.deleteTodo(event.target.id).then(() => {
@@ -62,8 +60,6 @@ $(document).ready(function(){
 		// grab the edit text
 	});
 
-
-
 	// complete todos
 	$('.main-container').on('click', 'input[type="checkbox"]', (event) => {
 		console.log("id", event.target.id);
@@ -81,7 +77,18 @@ $(document).ready(function(){
 		$('#counter').hide().fadeIn(1500).html(remainingTasks);
 	};
 
+	$('#registerButton').click(() => {
+		let email = $('inputEmail').val();
+		let password = $('inputPassword').val();
+		let username = $('inputUsername').val();
 
+		let user = {email, password};				// when key and value are the same, use this notation;
+		FbApi.registerUser(user).then((response) => {
+			console.log("register response: ", response);
+		}).catch((error) => {
+			console.log("error in registerUser: ", error);
+		});
+	});
 
 
 

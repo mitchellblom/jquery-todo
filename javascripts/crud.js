@@ -9,7 +9,6 @@ var FbApi = ((oldCrap) => {
 
 				let response = data.items;
 				Object.keys(response).forEach((key) => {		// this is the same action for every firebase call
-					console.log("key", key);
 					response[key].id = key;
 					items.push(response[key]);
 				});
