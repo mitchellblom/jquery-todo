@@ -1,19 +1,29 @@
-var FbApi = ((oldCrap) => {
+var FbApi = ((oldFbApi) => {
 
-	oldCrap.getTodos = () => {
+	oldFbApi.getTodos = (apiKeys) => {
 		let items = [];
-		return new Promise ((resolve, reject) => {
-
-			$.ajax('./database/seed.json')
-			.done((data) => {								// want to grab the value and inject the id
-
-				let response = data.items;
-				Object.keys(response).forEach((key) => {		// this is the same action for every firebase call
-					console.log("key", key);
+		return new Promise((resolve, reject) => {
+			$.ajax(`${apiKeys.databaseURL}/items.json`)
+			.done(data => {
+				let response = data;
+				Object.keys(response).forEach((key) => {
 					response[key].id = key;
 					items.push(response[key]);
 				});
-				FbApi.setTodos(items);
+				resolve(items);
+			})
+			.fail(error => {reject(error);});
+		});
+	};
+
+	oldFbApi.addTodo = (apiKeys, newTodo) => {
+		return new Promise ((resolve, reject) => {
+			$.ajax({
+				method: "POST",
+				url: `${apiKeys.databaseURL}/items.json`,
+				data: JSON.stringify(newTodo)
+			})
+			.done(() => {
 				resolve();
 			})
 			.fail((error) => {
@@ -22,36 +32,36 @@ var FbApi = ((oldCrap) => {
 		});
 	};
 
-	oldCrap.addTodo = (newTodo) => {
+	oldFbApi.deleteTodo = (apiKeys, id) => {
 		return new Promise ((resolve, reject) => {
-			newTodo.id = `item${FbApi.todoGetter().length}`;
-			FbApi.setSingleTodo(newTodo);
-			resolve();
+			$.ajax({
+				method: "DELETE",
+				url: `${apiKeys.databaseURL}/items/${id}.json`
+			})
+			.done(() => {
+				resolve();
+			})
+			.fail((error) => {
+				reject(error);
+			});
 		});
 	};
 
-	oldCrap.checker = (id) => {
-		return new Promise((resolve, reject) => {
-			FbApi.setChecked(id);
-			resolve();
-		});
-	};
-
-	oldCrap.deleteTodo = (id) => {
+	oldFbApi.editTodo = (apiKeys, todo, id) => {
 		return new Promise ((resolve, reject) => {
-			FbApi.duhlete(id);
-			resolve();
+			$.ajax({
+				method: "PUT",
+				url: `${apiKeys.databaseURL}/items/${id}.json`,
+				data: JSON.stringify(todo)
+			})
+			.done(() => {
+				resolve();
+			})
+			.fail((error) => {
+				reject(error);
+			});
 		});
 	};
 
-	oldCrap.editTodo = (id) => {
-		return new Promise ((resolve, reject) => {
-			FbApi.duhlete(id);
-			resolve();
-		});
-	};
-
-
-
-	return oldCrap;
+	return oldFbApi;
 })(FbApi || {});
