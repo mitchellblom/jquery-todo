@@ -20,7 +20,7 @@ $(function() {
     FbApi.firebaseCredentials().then((keys) => {
         apiKeys = keys;
         firebase.initializeApp(apiKeys);
-        FbApi.writeDom(apiKeys);
+        // FbApi.writeDom(apiKeys);
     }).catch((error) => {
         console.log("key errors", error);
     });
@@ -134,8 +134,8 @@ $(function() {
             clearLogin();
             $('#login-container').addClass('hide');
             $('.main-container').removeClass('hide');
-            FbApi.createLogoutButton(apiKeys);
             FbApi.writeDom(apiKeys);
+            FbApi.createLogoutButton(apiKeys);
         }).catch((error) => {
             console.log("error in loginUser: ", error);
         });
