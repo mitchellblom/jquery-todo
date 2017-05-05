@@ -116,9 +116,9 @@ $(function() {
     });
 
     let clearLogin = () => {
-        let email = $("").val();
-        let password = $("").val();
-        let username = $("").val();
+        let email = $("#inputEmail").val("");
+        let password = $("#inputPassword").val("");
+        let username = $("#inputUsername").val("");
     };
 
     $("#loginButton").click(() => {
@@ -134,12 +134,20 @@ $(function() {
             clearLogin();
             $('#login-container').addClass('hide');
             $('.main-container').removeClass('hide');
+            FbApi.createLogoutButton(apiKeys);
             FbApi.writeDom(apiKeys);
         }).catch((error) => {
             console.log("error in loginUser: ", error);
         });
 
     });
+
+    $('#logout-container').on('click', '#logoutButton', () => {
+        clearLogin();
+        FbApi.logoutUser();
+        $('#login-container').removeClass('hide');
+        $('.main-container').addClass('hide');
+    })
 
 
 
